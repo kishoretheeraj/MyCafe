@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".HomePage">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" >
+
+        <ImageView
+            android:id="@+id/samosaImg"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/samosa" />
+
+        <EditText
+            android:id="@+id/SamosaQty"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="330dp"
+            android:background="@drawable/inputborders"
+            android:textSize="15dp"
+            android:layout_marginTop="29dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/SamosaOrder"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="300dp"
+            android:letterSpacing="0.11"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="60dp"
+            android:text="ADD" />
+
+        <TextView
+            android:id="@+id/Samosa"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="120dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:letterSpacing="0.11"
+            android:textSize="20dp"
+            android:text="SAMOSA" />
+
+        <TextView
+            android:id="@+id/SamosaRate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="120dp"
+            android:textSize="20dp"
+            android:letterSpacing="0.11"
+            android:text="Rs.15" />
+
+        <TextView
+            android:id="@+id/SamosaPlus"
+            android:layout_marginLeft="360dp"
+            android:layout_marginTop="29dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/inputborders"
+            android:text="+"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/SamosaMinus"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="29dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/inputborders"
+            android:text="-"
+            android:gravity="center" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="128dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" >
+
+        <ImageView
+            android:id="@+id/dosaImg"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/dosa" />
+
+        <EditText
+            android:id="@+id/DosaQty"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="330dp"
+            android:background="@drawable/inputborders"
+            android:textSize="15dp"
+            android:layout_marginTop="29dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/DosaOrder"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="300dp"
+            android:letterSpacing="0.11"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="60dp"
+            android:text="ADD" />
+
+        <TextView
+            android:id="@+id/Dosa"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="120dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:letterSpacing="0.11"
+            android:textSize="20dp"
+            android:text="DOSA" />
+
+        <TextView
+            android:id="@+id/DosaRate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="120dp"
+            android:textSize="20dp"
+            android:letterSpacing="0.11"
+            android:text="Rs.30" />
+
+        <TextView
+            android:id="@+id/DosaPlus"
+            android:layout_marginLeft="360dp"
+            android:layout_marginTop="29dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/inputborders"
+            android:text="+"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/DosaMinus"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="29dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/inputborders"
+            android:text="-"
+            android:gravity="center" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="252dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" >
+
+        <ImageView
+            android:id="@+id/vculetImg"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/vegcutlet" />
+
+        <EditText
+            android:id="@+id/VegCutletQty"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="330dp"
+            android:background="@drawable/inputborders"
+            android:textSize="15dp"
+            android:layout_marginTop="29dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/VcutletOrder"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="300dp"
+            android:letterSpacing="0.11"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="60dp"
+            android:text="ADD" />
+
+        <TextView
+            android:id="@+id/Cutlet"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="120dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:letterSpacing="0.11"
+            android:textSize="20dp"
+            android:text="VEG CUTLET" />
+
+        <TextView
+            android:id="@+id/CutletRate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="120dp"
+            android:textSize="20dp"
+            android:letterSpacing="0.11"
+            android:text="Rs.15" />
+
+        <TextView
+            android:id="@+id/CutletPlus"
+            android:layout_marginLeft="360dp"
+            android:layout_marginTop="29dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/inputborders"
+            android:text="+"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/CutletMinus"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="29dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/inputborders"
+            android:text="-"
+            android:gravity="center" />
+
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

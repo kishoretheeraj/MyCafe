@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText username, password;
+    EditText userName, password;
     Button login;
     TextView newuser;
     boolean isEmailValid, isPasswordValid;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        username = (EditText) findViewById(R.id.username);
+        userName = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
         newuser = (TextView) findViewById(R.id.newuser);
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SetValidation() {
-        if (username.getText().toString().isEmpty()) {
+        if (userName.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Enter email Address", Toast.LENGTH_SHORT).show();
             isEmailValid = false;
         } else {
-            if (username.getText().toString().trim().contains(emailPattern)) {
+            if (userName.getText().toString().trim().contains(emailPattern)) {
                 isEmailValid = true;
             } else {
                 isEmailValid = false;

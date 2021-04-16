@@ -28,7 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerBtn;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
-
+    boolean isEmailValid, isPasswordValid;
+    String emailPattern = "@ritchennai.edu.in";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(email)) {
+                /*if (TextUtils.isEmpty(email)) {
                     emailAddress.setError("Email is required");
                     return;
-                }
+                }*/
 
                 if (TextUtils.isEmpty(mobile)) {
                     phoneNumber.setError("Mobile Number is required");
@@ -110,43 +111,63 @@ public class RegisterActivity extends AppCompatActivity {
                     finalpassword = firstpassword;
 
                 }
-
-                progressBar.setVisibility(View.VISIBLE);
-
-
-                fAuth.createUserWithEmailAndPassword(email, finalpassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Registration Successfull", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                            startActivity(intent);
-                            finish();
-
-                            //send verification link
-                            FirebaseUser user = fAuth.getCurrentUser();
-                            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(RegisterActivity.this, "Verification Email has been sent successfully", Toast.LENGTH_SHORT).show();
-
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(RegisterActivity.this, "Error!!" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-
-
-                        } else {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(RegisterActivity.this, "Error!!!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
+                if (emailAddress.getText().toString().isEmpty()) {
+                    emailAddress.setError("Enter email Address");
+                    isEmailValid = false;
+                } else {
+                    if (emailAddress.getText().toString().trim().contains(emailPattern)) {
+                        isEmailValid = true;
+                    } else {
+                        isEmailValid = false;
+                        emailAddress.setError("Enter College Mail ID");
+                        Toast.makeText(getApplicationContext(), "Invalid Email Id", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                }
+
+                if (isEmailValid & firstpassword.equals(secondpassword)) {
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    fAuth.createUserWithEmailAndPassword(email, finalpassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                                startActivity(intent);
+                                finish();
+
+                                //send verification link
+                                FirebaseUser user = fAuth.getCurrentUser();
+                                user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(RegisterActivity.this, "Verification Email has been sent successfully", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(RegisterActivity.this, "Error!!" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+
+
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(RegisterActivity.this, "Error!!!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                } else {
+                    if (!firstpassword.equals(secondpassword)) {
+                        firstPassword.setError("Password Mismatch");
+                    } else {
+                        emailAddress.setError("Enter College Mail ID Only");
+                    }
+                }
 
             }
         });

@@ -122,23 +122,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //get email and send link
-                String mail=resetmail1.getText().toString();
-                fAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Reset link as been sent", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                if (resetmail1.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Enter Your College Mail ID", Toast.LENGTH_SHORT).show();
+                } else {
+                    String mail = resetmail1.getText().toString();
+                    fAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Reset link as been sent", Snackbar.LENGTH_LONG);
+                            snackbar.show();
 
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "Error!!"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MainActivity.this, "Error!!" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
         passworddialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

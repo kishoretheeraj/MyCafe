@@ -16,7 +16,7 @@
         android:ems="10"
         android:textColor="@color/colorPrimaryDark"
         android:textCursorDrawable="@null"
-        android:hint="Email ID"
+        android:hint="College Mail ID"
         android:inputType="textEmailAddress"
         android:paddingStart="5dp"
         android:textSize="20sp"

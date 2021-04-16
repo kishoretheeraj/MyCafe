@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextView newuser;
     ProgressBar progressBar;
     boolean isEmailValid, isPasswordValid;
-    String emailPattern = "@ritchennai.edu.in";
+    String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             userName.setError("Enter email Address");
             isEmailValid = false;
         } else {
-            if (userName.getText().toString().trim().contains(emailPattern)) {
+            if (userName.getText().toString().trim().matches(emailPattern)) {
                 isEmailValid = true;
             } else {
                 isEmailValid = false;

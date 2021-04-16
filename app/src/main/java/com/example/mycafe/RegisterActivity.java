@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     ProgressBar progressBar;
     boolean isEmailValid, isPasswordValid;
-    String emailPattern = "@ritchennai.edu.in";
+    String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
                     emailAddress.setError("Enter email Address");
                     isEmailValid = false;
                 } else {
-                    if (emailAddress.getText().toString().trim().contains(emailPattern)) {
+                    if (emailAddress.getText().toString().trim().matches(emailPattern)) {
                         isEmailValid = true;
                     } else {
                         isEmailValid = false;

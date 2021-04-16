@@ -14,9 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -119,7 +122,26 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), HomePage.class);
                             startActivity(intent);
                             finish();
+
+                            //send verification link
+                            FirebaseUser user = fAuth.getCurrentUser();
+                            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(RegisterActivity.this, "Verification Email has been sent successfully", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(RegisterActivity.this, "Error!!" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(RegisterActivity.this, "Error!!!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     TextView newuser;
     ProgressBar progressBar;
-    boolean isEmailValid, isPasswordValid;
+    boolean isEmailValid;
     String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
 
     @Override

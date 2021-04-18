@@ -20,6 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,8 +32,10 @@ public class RegisterActivity extends AppCompatActivity {
     EditText firstName, lastName, phoneNumber, emailAddress, firstPassword, secondPassword;
     Button registerBtn;
     FirebaseAuth fAuth;
+    String userid;
     ProgressBar progressBar;
-    boolean isEmailValid, isPasswordValid;
+    FirebaseFirestore mFireStore;
+    boolean isEmailValid;
     String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
 
     @Override
@@ -46,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.Register);
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
+        mFireStore= FirebaseFirestore.getInstance();
 
 
         BackToLogin.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +136,51 @@ public class RegisterActivity extends AppCompatActivity {
                 if (isEmailValid & firstpassword.equals(secondpassword)) {
 
                     progressBar.setVisibility(View.VISIBLE);
+                    final String finalPassword = finalpassword;
                     fAuth.createUserWithEmailAndPassword(email, finalpassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                userid=fAuth.getCurrentUser().getUid();
+                               /* String firstname = ed1.getText().toString().trim();
+                                String lastname = ed1.getText().toString().trim();
+                                String email = ed2.getText().toString().trim();
+                                String mobile = ed3.getText().toString().trim();
+                                String password = ed4.getText().toString();*/
+
+                                Map<String,String> usermap=new HashMap<>();
+                                usermap.put("Id",userid);
+                                usermap.put("FirstName",firstname);
+                                usermap.put("LastName",lastname);
+                                usermap.put("Email",email);
+                                usermap.put("Mobile",mobile);
+                                usermap.put("Password", finalPassword);
+
+
+
+                                DocumentReference documentReference=mFireStore.collection("users").document(userid);
+
+                                documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();;
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(RegisterActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+
+
+
+
+
+
+
+
                                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                 startActivity(intent);

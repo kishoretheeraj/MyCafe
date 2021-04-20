@@ -2,6 +2,7 @@ package com.example.mycafe;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -53,7 +54,8 @@ public class HomePage extends AppCompatActivity {
 
 
     public void onBackPressed() {
-        finishAffinity();
-        finish();
+        //finishAffinity();
+        //finish();
     }
+
 }

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.view.View;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SetValidation();
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
             }
         });
 
@@ -111,9 +114,10 @@ public class MainActivity extends AppCompatActivity {
             userName.setError("Enter College Mail ID");
         }
     }
+
     public void forgot(View view) {
-        final EditText resetmail1=new EditText(view.getContext());
-        final AlertDialog.Builder passworddialog=new AlertDialog.Builder(view.getContext());
+        final EditText resetmail1 = new EditText(view.getContext());
+        final AlertDialog.Builder passworddialog = new AlertDialog.Builder(view.getContext());
         passworddialog.setTitle("Reset Password");
         passworddialog.setMessage("Enter your Email id to Receive Reset link :-");
         passworddialog.setView(resetmail1);
@@ -153,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         });
         passworddialog.show();
     }
+
     public void onBackPressed() {
         finish();
     }

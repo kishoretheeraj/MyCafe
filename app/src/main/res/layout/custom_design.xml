@@ -36,7 +36,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="330dp"
             android:layout_marginTop="28dp"
-            android:background="@drawable/inputborders"
+            android:background="@drawable/inputborder"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"

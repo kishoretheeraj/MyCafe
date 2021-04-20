@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -75,6 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
                 final String firstpassword = firstPassword.getText().toString();
                 final String secondpassword = secondPassword.getText().toString();
                 String finalpassword = null;
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
 
 
                 if (TextUtils.isEmpty(firstname)) {

@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name=".Activity.UpdateProfile"></activity>
+        <activity android:name=".Activity.Dashboard" />
+        <activity android:name=".Activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomePage" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".Activity.HomePage" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.MainActivity" />
     </application>
 
 </manifest>

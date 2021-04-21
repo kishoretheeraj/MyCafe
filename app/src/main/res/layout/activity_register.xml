@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFC821"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity.RegisterActivity">
 
     <EditText
         android:id="@+id/EmailAddress"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginTop="25dp"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="20dp"
         android:background="@drawable/inputborders"
         android:ems="10"
         android:textColor="@color/colorPrimaryDark"
@@ -26,13 +28,15 @@
         app:layout_constraintTop_toBottomOf="@+id/PhoneNo" />
 
     <EditText
-        android:id="@+id/FirstName"
+        android:id="@+id/Name"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginTop="77dp"
         android:background="@drawable/inputborders"
         android:ems="10"
-        android:hint="First Name"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawablePadding="20dp"
+        android:hint="Full Name"
         android:inputType="textPersonName"
         android:paddingStart="5dp"
         android:textSize="20sp"
@@ -58,20 +62,22 @@
         app:layout_constraintTop_toBottomOf="@+id/RetypePassword" />
 
     <EditText
-        android:id="@+id/LastName"
+        android:id="@+id/Dept"
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/inputborders"
         android:ems="10"
-        android:hint="Last Name"
+        android:drawableStart="@drawable/ic_baseline_menu_book_24"
+        android:drawablePadding="20dp"
+        android:hint="Department"
         android:inputType="textPersonName"
         android:paddingStart="5dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/Name" />
 
     <TextView
         android:id="@+id/BackToLogin"
@@ -94,6 +100,9 @@
         android:layout_width="300dp"
         android:layout_height="49dp"
         android:layout_marginTop="25dp"
+        android:drawableStart="@drawable/ic_baseline_phone_android_24"
+        android:drawablePadding="20dp"
+        android:maxLength="10"
         android:background="@drawable/inputborders"
         android:ems="10"
         android:hint="Phone Number"
@@ -103,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LastName" />
+        app:layout_constraintTop_toBottomOf="@+id/Dept" />
 
     <EditText
         android:id="@+id/CreatePassword"
@@ -113,6 +122,8 @@
         android:background="@drawable/inputborders"
         android:ems="10"
         android:hint="Create Password"
+        android:drawableStart="@drawable/ic_baseline_security_24"
+        android:drawablePadding="20dp"
         android:inputType="textPassword"
         android:paddingStart="5dp"
         android:textSize="20sp"
@@ -128,6 +139,8 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/inputborders"
         android:ems="10"
+        android:drawableStart="@drawable/ic_baseline_security_24"
+        android:drawablePadding="20dp"
         android:hint="Retype Password"
         android:inputType="textPassword"
         android:paddingLeft="5dp"

@@ -1,4 +1,4 @@
-package com.example.mycafe;
+package com.example.mycafe.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mycafe.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,19 +25,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
     TextView BackToLogin;
-    EditText firstName, lastName, phoneNumber, emailAddress, firstPassword, secondPassword;
+    EditText firstName, Dept, phoneNumber, emailAddress, firstPassword, secondPassword;
     Button registerBtn;
     FirebaseAuth fAuth;
     String userid;
     ProgressBar progressBar;
     FirebaseFirestore mFireStore;
     boolean isEmailValid;
+    String thisDate;
     String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
 
     @Override
@@ -45,8 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         BackToLogin = findViewById(R.id.BackToLogin);
-        firstName = findViewById(R.id.FirstName);
-        lastName = findViewById(R.id.LastName);
+        firstName = findViewById(R.id.Name);
+        Dept = findViewById(R.id.Dept);
         phoneNumber = findViewById(R.id.PhoneNo);
         emailAddress = findViewById(R.id.EmailAddress);
         firstPassword = findViewById(R.id.CreatePassword);
@@ -54,7 +58,13 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.Register);
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
-        mFireStore= FirebaseFirestore.getInstance();
+        mFireStore = FirebaseFirestore.getInstance();
+
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date todayDate = new Date();
+        thisDate = currentDate.format(todayDate);
+        Toast.makeText(this, "" + thisDate, Toast.LENGTH_SHORT).show();
 
 
         BackToLogin.setOnClickListener(new View.OnClickListener() {
@@ -70,22 +80,22 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String firstname = firstName.getText().toString().trim();
-                final String lastname = lastName.getText().toString().trim();
+                final String Department = Dept.getText().toString().trim();
                 final String email = emailAddress.getText().toString().trim();
                 final String mobile = phoneNumber.getText().toString().trim();
                 final String firstpassword = firstPassword.getText().toString();
                 final String secondpassword = secondPassword.getText().toString();
                 String finalpassword = null;
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
 
 
                 if (TextUtils.isEmpty(firstname)) {
                     firstName.setError("First Name is required");
                     return;
                 }
-                if (TextUtils.isEmpty(lastname)) {
-                    lastName.setError("Last Name is required");
+                if (TextUtils.isEmpty(Department)) {
+                    Dept.setError("Department is required");
                     return;
                 }
 
@@ -101,6 +111,19 @@ public class RegisterActivity extends AppCompatActivity {
                 if (mobile.length() < 10) {
                     phoneNumber.setError("Mobile Number Shouldn't be less than 10 Digits");
                     return;
+                }
+                if (emailAddress.getText().toString().isEmpty()) {
+                    emailAddress.setError("Enter email Address");
+                    isEmailValid = false;
+                } else {
+                    if (emailAddress.getText().toString().trim().matches(emailPattern)) {
+                        isEmailValid = true;
+                    } else {
+                        isEmailValid = false;
+                        emailAddress.setError("Enter College Mail ID");
+                        Toast.makeText(getApplicationContext(), "Invalid Email Id", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
                 if (TextUtils.isEmpty(firstpassword)) {
                     firstPassword.setError("Password Required");
@@ -122,19 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
                     finalpassword = firstpassword;
 
                 }
-                if (emailAddress.getText().toString().isEmpty()) {
-                    emailAddress.setError("Enter email Address");
-                    isEmailValid = false;
-                } else {
-                    if (emailAddress.getText().toString().trim().matches(emailPattern)) {
-                        isEmailValid = true;
-                    } else {
-                        isEmailValid = false;
-                        emailAddress.setError("Enter College Mail ID");
-                        Toast.makeText(getApplicationContext(), "Invalid Email Id", Toast.LENGTH_SHORT).show();
-                    }
 
-                }
 
                 if (isEmailValid & firstpassword.equals(secondpassword)) {
 
@@ -144,44 +155,32 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                userid=fAuth.getCurrentUser().getUid();
-                               /* String firstname = ed1.getText().toString().trim();
-                                String lastname = ed1.getText().toString().trim();
-                                String email = ed2.getText().toString().trim();
-                                String mobile = ed3.getText().toString().trim();
-                                String password = ed4.getText().toString();*/
+                                userid = fAuth.getCurrentUser().getUid();
 
-                                Map<String,String> usermap=new HashMap<>();
-                                usermap.put("Id",userid);
-                                usermap.put("FirstName",firstname);
-                                usermap.put("LastName",lastname);
-                                usermap.put("Email",email);
-                                usermap.put("Mobile",mobile);
+                                Map<String, String> usermap = new HashMap<>();
+                                usermap.put("Id", userid);
+                                usermap.put("Datecreated", thisDate);
+                                usermap.put("Name", firstname);
+                                usermap.put("Department", Department.toUpperCase());
+                                usermap.put("Email", email);
+                                usermap.put("Mobile", mobile);
                                 usermap.put("Password", finalPassword);
 
 
-
-                                DocumentReference documentReference=mFireStore.collection("users").document(userid);
+                                DocumentReference documentReference = mFireStore.collection("users").document(userid);
 
                                 documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();;
+                                        Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(RegisterActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-
-
-
-
-
-
-
 
 
                                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();

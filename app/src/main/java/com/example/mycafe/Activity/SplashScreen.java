@@ -1,4 +1,4 @@
-package com.example.mycafe;
+package com.example.mycafe.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,25 +8,26 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mycafe.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreen extends AppCompatActivity {
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
     ProgressBar progressBar;
-    FirebaseAuth fauth;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         progressBar = findViewById(R.id.progressBar3);
-        fauth = FirebaseAuth.getInstance();
+        fAuth = FirebaseAuth.getInstance();
 
+        int SPLASH_DISPLAY_LENGTH = 2000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 /* Create an Intent that will start the MainActivity. */
-                if (fauth.getCurrentUser() != null) {
+                if (fAuth.getCurrentUser() != null) {
                     startActivity(new Intent(getApplicationContext(), HomePage.class));
                     progressBar.setVisibility(View.VISIBLE);
                     finish();

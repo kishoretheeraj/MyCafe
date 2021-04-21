@@ -1,13 +1,17 @@
-package com.example.mycafe;
+package com.example.mycafe.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.mycafe.Fragment.CartFragment;
+import com.example.mycafe.Fragment.HomeFragment;
+import com.example.mycafe.Fragment.ProfileFragment;
+import com.example.mycafe.Fragment.SearchFragment;
+import com.example.mycafe.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {

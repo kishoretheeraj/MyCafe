@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFC821"
+    tools:context=".Activity.UpdateProfile">
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="20dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/inputborders"
+        android:ems="10"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryDark"
+        android:textCursorDrawable="@null"
+        android:hint="College Mail ID"
+        android:inputType="textEmailAddress"
+        android:paddingStart="5dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawablePadding="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/inputborders"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:paddingStart="5dp"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/Mobile"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="25dp"
+        android:drawableStart="@drawable/ic_baseline_phone_android_24"
+        android:drawablePadding="20dp"
+        android:maxLength="10"
+        android:background="@drawable/inputborders"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        android:paddingStart="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/Dept"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/inputborders"
+        android:ems="10"
+        android:hint="Department"
+        android:drawableStart="@drawable/ic_baseline_menu_book_24"
+        android:drawablePadding="20dp"
+        android:inputType="textPersonName"
+        android:paddingStart="5dp"
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/updatebtn"
+        android:layout_width="300dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimary"
+        android:letterSpacing="0.11"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Update"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="300dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/inputborders"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:paddingStart="5dp"
+        android:text="DELETE USER"
+        android:textColor="#2149FF"
+        android:textSize="15sp" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BackToLogin" />
+
+</LinearLayout>

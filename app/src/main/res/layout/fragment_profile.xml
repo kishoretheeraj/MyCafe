@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/sayingText"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/inputborders"
                 android:fontFamily="cursive"
                 android:gravity="center"
@@ -97,29 +97,29 @@
             <TextView
 
                 android:id="@+id/verifymsg"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
                 android:text="Email has not been Verified!!! "
                 android:textColor="#f42439"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/verifybtn"
-                android:background="@drawable/inputborders"
-                android:visibility="invisible"
-                android:layout_margin="8dp"
-                android:padding="6dp"
-                android:textColor="#2149FF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Verify Now" />
+                android:layout_margin="8dp"
+                android:background="@drawable/inputborders"
+                android:padding="6dp"
+                android:text="Verify Now"
+                android:textColor="#2149FF"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView

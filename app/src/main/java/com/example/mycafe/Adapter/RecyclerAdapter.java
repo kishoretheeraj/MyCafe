@@ -1,5 +1,6 @@
 package com.example.mycafe.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -16,12 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycafe.R;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
-{
+import java.util.ArrayList;
 
-    String data[], data2[];
-    int data3[];
-    int qty;
+import static com.example.mycafe.Activity.items.addItems;
+import static com.example.mycafe.Activity.items.updateItems;
+
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+    String[] data;
+    String[] data2;
+    int[] data3;
     Context context;
 
     public RecyclerAdapter(Context context, String[] data, String[] data2, int[] data3) {
@@ -33,78 +37,81 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @NonNull
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
+    public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.custom_design,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        View view = layoutInflater.inflate(R.layout.custom_design, parent, false);
+        @SuppressWarnings("UnnecessaryLocalVariable") ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, final int position) {
 
         holder.foodName.setText(data[position]);
         holder.foodRate.setText(data2[position]);
         holder.foodImg.setImageResource(data3[position]);
 
-        holder.AddButton.setEnabled(false);
-        holder.AddButton.setBackgroundColor(Color.parseColor("#FFF27D"));
-        holder.AddButton.setTextColor(Color.parseColor("#C5C5C5"));
-
         holder.QtyPlus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(holder.quantity.getText()));
-                if(count == 10){
+                if (count == 10) {
                     String foodname = (String) holder.foodName.getText();
                     Toast.makeText(context, "Cannot order more than 10 " + foodname, Toast.LENGTH_SHORT).show();
-                } else if (count == 0){
-                    holder.AddButton.setEnabled(true);
-                    holder.quantity.setText("1");
-                    holder.AddButton.setBackgroundResource(R.drawable.button_border);
-                    holder.AddButton.setTextColor(Color.parseColor("#000000"));
-                } else{
+                } else {
                     count += 1;
                     holder.quantity.setText("" + count);
+                    updateItems((String) holder.foodName.getText(), String.valueOf(count));
                 }
             }
         });
 
         holder.QtyMinus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(holder.quantity.getText()));
-                if(count == 0){
-                    holder.AddButton.setEnabled(false);
-                    holder.AddButton.setBackgroundColor(Color.parseColor("#FFF27D"));
-                    holder.AddButton.setTextColor(Color.parseColor("#C5C5C5"));
-                } else{
-                    count -= 1;
-                    if (count == 0){
-                        holder.AddButton.setEnabled(false);
-                        holder.AddButton.setBackgroundColor(Color.parseColor("#FFF27D"));
-                        holder.AddButton.setTextColor(Color.parseColor("#C5C5C5"));
-                    }
-                    holder.quantity.setText("" + count);
+                count -= 1;
+                if (count == 0) {
+                    holder.AddButton.setVisibility(View.VISIBLE);
                 }
+                holder.quantity.setText("" + count);
+                updateItems((String) holder.foodName.getText(), String.valueOf(count));
             }
         });
+
+        holder.AddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> lis2 = new ArrayList<>();
+                holder.quantity.setText("1");
+
+                lis2.add(data[position]);
+                lis2.add(data2[position]);
+                lis2.add(String.valueOf(holder.quantity.getText()));
+
+                addItems(lis2);
+
+                holder.AddButton.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return data.length;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView foodImg;
         EditText quantity;
         Button AddButton;
         TextView foodName, QtyPlus, QtyMinus, foodRate;
-        public ViewHolder(@NonNull final View itemView)
-        {
+
+        public ViewHolder(@NonNull final View itemView) {
 
             super(itemView);
             foodImg = itemView.findViewById(R.id.imageView);
@@ -114,8 +121,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             QtyPlus = itemView.findViewById(R.id.textView3);
             QtyMinus = itemView.findViewById(R.id.textView4);
             foodRate = itemView.findViewById(R.id.textView2);
-
-
 
         }
     }

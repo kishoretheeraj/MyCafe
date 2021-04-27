@@ -35,8 +35,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="330dp"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/inputborder"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/inputborders"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
@@ -48,7 +48,7 @@
             android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_marginLeft="300dp"
-            android:layout_marginTop="61dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/button_border"
             android:letterSpacing="0.11"
             android:text="ADD"
@@ -79,7 +79,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="360dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/qty_border_right"
             android:gravity="center"
             android:text="+"
@@ -91,7 +91,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="300dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/qty_border_left"
             android:gravity="center"
             android:text="-"
@@ -100,5 +100,6 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
 
+
+</androidx.constraintlayout.widget.ConstraintLayout>

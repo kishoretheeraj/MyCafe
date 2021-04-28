@@ -11,13 +11,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mycafe.Activity.HomePage;
 import com.example.mycafe.Activity.items;
 import com.example.mycafe.Adapter.CartListAdapter;
 import com.example.mycafe.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -28,8 +33,9 @@ public class CartFragment extends Fragment {
     static ArrayList<ArrayList<String>> itm = items.getList();
     public static int total = 0;
 
-    static TextView tot;
-    static Button btn;
+    static TextView tot, not;
+    static FloatingActionButton fab;
+    static CardView cardorder;
 
     @Nullable
     @Override
@@ -37,26 +43,41 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         tot = view.findViewById(R.id.tv_total);
-        btn = view.findViewById(R.id.PlaceOrder);
-        btn.setEnabled(false);
-        btn.setBackgroundColor(Color.parseColor("#A5B4F4"));
+        not = view.findViewById(R.id.NoitemText);
+        fab = view.findViewById(R.id.fabadd);
+        cardorder = view.findViewById(R.id.ordercard);
+        cardorder.setVisibility(View.GONE);
 
         recyclerView2 = view.findViewById(R.id.recycler_cart);
         recyclerView2.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter2 = new CartListAdapter(view.getContext(), itm);
         recyclerView2.setAdapter(adapter2);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.hide(fragmentManager.findFragmentByTag("2")).show(fragmentManager.findFragmentByTag("1"));
+                fragmentTransaction.commit();
+                HomePage.setActive();
+            }
+        });
+
         int len = itm.size();
 
         if (len != 0) {
 
             calculateTotal();
-            Toast.makeText(getContext(), "" + total, Toast.LENGTH_SHORT).show();
+            cardorder.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.GONE);
+            not.setVisibility(View.GONE);
 
         } else {
             tot.setText("0");
-            btn.setEnabled(false);
-            btn.setBackgroundColor(Color.parseColor("#A5B4F4"));
+            cardorder.setVisibility(View.GONE);
+            fab.setVisibility(View.VISIBLE);
+            not.setVisibility(View.VISIBLE);
         }
 
         return view;
@@ -72,10 +93,6 @@ public class CartFragment extends Fragment {
                 total = total + (Integer.parseInt(str) * Integer.parseInt(itm.get(i).get(2)));
                 i++;
             }
-
-            btn.setEnabled(true);
-            btn.setBackgroundColor(Color.parseColor("#2149FF"));
-
         }
 
         tot.setText("" + total);

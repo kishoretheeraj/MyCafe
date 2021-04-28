@@ -6,7 +6,6 @@ public class items{
     private static final ArrayList<ArrayList<String>> list = new ArrayList<>();
 
     public static void addItems(ArrayList<String> lis) {
-        //kishore theeraj v j
         list.add(lis);
     }
 

@@ -15,6 +15,7 @@ import com.example.mycafe.R;
 import com.example.mycafe.Adapter.RecyclerAdapter;
 
 public class HomeFragment extends Fragment {
+
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
 
@@ -27,12 +28,10 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new RecyclerAdapter(view.getContext(), snackNames, snackRate, imgFood);
         recyclerView.setAdapter(adapter);
-
 
         return view;
     }

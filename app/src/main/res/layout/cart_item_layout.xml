@@ -19,11 +19,11 @@
             android:layout_marginStart="0dp"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
-            android:paddingStart="10dp"
+            android:paddingStart="40dp"
             android:paddingEnd="5dp"
             android:text="CHOCO SANDWICH"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
@@ -66,6 +66,13 @@
             android:text="Rs.1000"
             android:textSize="15sp"
             android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imgrem"
+            android:background="@color/colorPrimary"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            app:srcCompat="@android:drawable/ic_delete" />
 
     </androidx.cardview.widget.CardView>
 

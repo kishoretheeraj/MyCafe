@@ -1,13 +1,10 @@
 package com.example.mycafe.Fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,9 +23,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class CartFragment extends Fragment {
-    RecyclerView recyclerView2;
-    CartListAdapter adapter2;
+public class CartFragment extends Fragment{
+    static RecyclerView recyclerView2;
+    static CartListAdapter adapter2;
 
     static ArrayList<ArrayList<String>> itm = items.getList();
     public static int total = 0;
@@ -83,7 +80,7 @@ public class CartFragment extends Fragment {
         return view;
     }
 
-    static void calculateTotal() {
+    public static void calculateTotal() {
         int i = 0;
         total = 0;
         int len = itm.size();
@@ -93,6 +90,12 @@ public class CartFragment extends Fragment {
                 total = total + (Integer.parseInt(str) * Integer.parseInt(itm.get(i).get(2)));
                 i++;
             }
+        }
+
+        if (total == 0) {
+            cardorder.setVisibility(View.GONE);
+            fab.setVisibility(View.VISIBLE);
+            not.setVisibility(View.VISIBLE);
         }
 
         tot.setText("" + total);

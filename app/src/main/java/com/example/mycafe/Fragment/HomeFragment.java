@@ -13,13 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycafe.R;
 import com.example.mycafe.Adapter.RecyclerAdapter;
+import com.google.common.primitives.Ints;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    RecyclerAdapter adapter;
+    static RecyclerView recyclerView;
+    static RecyclerAdapter adapter;
 
-    String snackNames[] = {"Samosa", "Dosa", "Idly-Vada", "VegCutlet", "Pasta", "EggPasta", "Noodles", "EggNoodles", "Sandwich", "ChocoSandwich"};
+    static String[] snackNames = {"Samosa", "Dosa", "Idly-Vada", "VegCutlet", "Pasta", "EggPasta", "Noodles", "EggNoodles", "Sandwich", "ChocoSandwich"};
     String snackRate[] = {"Rs.15", "Rs.30", "Rs.20", "Rs.15", "Rs.35", "Rs.40", "Rs.30", "Rs.35", "Rs.25", "Rs.20"};
     int imgFood[] = {R.drawable.samosa, R.drawable.dosa, R.drawable.idlyvada, R.drawable.vegcutlet, R.drawable.vegpasta, R.drawable.eggpasta, R.drawable.noodles, R.drawable.noodles, R.drawable.sandwich, R.drawable.chocosandwich};
 
@@ -34,5 +37,16 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    public static void Changed(String fname) {
+        int i;
+        for (i=0; i<snackNames.length; i++) {
+            if (snackNames[i].equalsIgnoreCase(fname))
+                break;
+        }
+        View view2;
+        view2 = recyclerView.getChildAt(i);
+        view2.findViewById(R.id.button).setVisibility(View.VISIBLE);
     }
 }

@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
     boolean isEmailValid;
     String thisDate;
     String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
+    ArrayList<String> orders = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 userid = fAuth.getCurrentUser().getUid();
 
-                                Map<String, String> usermap = new HashMap<>();
+                                Map<String, Object> usermap = new HashMap<>();
                                 usermap.put("Id", userid);
                                 usermap.put("Datecreated", thisDate);
                                 usermap.put("Name", firstname);
@@ -165,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 usermap.put("Email", email);
                                 usermap.put("Mobile", mobile);
                                 usermap.put("Password", finalPassword);
+                                usermap.put("order Id", orders);
 
 
                                 DocumentReference documentReference = mFireStore.collection("users").document(userid);

@@ -68,14 +68,6 @@ public class ProfileFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
         if (user.isEmailVerified()) {
             verifybtn.setVisibility(View.INVISIBLE);
             verifybtn.setVisibility(View.INVISIBLE);
@@ -86,7 +78,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     FirebaseUser user = fAuth.getCurrentUser();
-                    Toast.makeText(view.getContext(), "clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(view.getContext(), "clicked", Toast.LENGTH_SHORT).show();
                     user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

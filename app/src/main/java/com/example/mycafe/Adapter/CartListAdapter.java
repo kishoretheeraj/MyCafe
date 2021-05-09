@@ -1,4 +1,5 @@
 package com.example.mycafe.Adapter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +16,11 @@ import com.example.mycafe.Activity.items;
 import com.example.mycafe.Fragment.CartFragment;
 import com.example.mycafe.Fragment.HomeFragment;
 import com.example.mycafe.R;
-
 import java.util.ArrayList;
 
 import static com.example.mycafe.Activity.items.updateItems;
 
-public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder>
-{
+public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> {
 
     ArrayList<ArrayList<String>> dataitems;
     Context context;
@@ -35,7 +34,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.cart_item_layout,parent,false);
+        View view = layoutInflater.inflate(R.layout.cart_item_layout, parent, false);
         @SuppressWarnings("UnnecessaryLocalVariable") ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -74,7 +73,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView itemrate,itemname, itemamt;
+        private final TextView itemrate, itemname, itemamt;
         private final EditText textQty;
         private final ImageButton btrem;
 

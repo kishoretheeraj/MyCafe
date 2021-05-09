@@ -37,8 +37,8 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_dashboard);
+
         Name = findViewById(R.id.Name);
         Phone = findViewById(R.id.Phone);
         changepassword = findViewById(R.id.changepassword);

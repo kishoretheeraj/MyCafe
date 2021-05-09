@@ -38,6 +38,7 @@ public class HomePage extends AppCompatActivity {
         fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
         fm.beginTransaction().add(R.id.fragment_container, fragment1, "1").commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
 
@@ -46,16 +47,21 @@ public class HomePage extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+            //Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.home:
                     fm.beginTransaction().hide(active).show(fragment1).commit();
                     active = fragment1;
                     return true;
+                //selectedFragment = HomeFragment.getInstance();
+                //break;
 
                 case R.id.search:
                     fm.beginTransaction().hide(active).show(fragment4).commit();
                     active = fragment4;
                     return true;
+                //selectedFragment = new SearchFragment();
+                //break;
 
                 case R.id.cart:
                     FragmentTransaction fragmentTransaction = fm.beginTransaction().hide(active).show(fragment2);
@@ -64,16 +70,22 @@ public class HomePage extends AppCompatActivity {
                     fragmentTransaction.commit();
                     active = fragment2;
                     return true;
+                //selectedFragment = new CartFragment();
+                //break;
 
                 case R.id.profile:
                     fm.beginTransaction().hide(active).show(fragment3).commit();
                     active = fragment3;
                     return true;
+                //selectedFragment = new ProfileFragment();
+                //break;
 
             }
 
             return false;
 
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+            //return true;
         }
     };
 

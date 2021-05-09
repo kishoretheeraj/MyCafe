@@ -32,11 +32,17 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.SimpleTimeZone;
 
 public class CartFragment extends Fragment {
 
@@ -53,7 +59,7 @@ public class CartFragment extends Fragment {
     static CardView cardorder;
     FirebaseAuth fAuth;
     FirebaseUser user;
-    String userId, Name, Mobile;
+    String userId, Name, Mobile, thisDate, thisTime;
     ArrayList<String> orders = new ArrayList<>();
 
     @Nullable
@@ -89,6 +95,16 @@ public class CartFragment extends Fragment {
                             orders = (ArrayList<String>) task.getResult().get("order Id");
 
 
+                            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                            Date todayDate = new Date();
+                            thisDate = currentDate.format(todayDate);
+                            Toast.makeText(view.getContext(), "" + thisDate, Toast.LENGTH_SHORT).show();
+
+                            DateFormat dateFormat = new SimpleDateFormat("hh.mm aa");
+                            thisTime = dateFormat.format(new Date());
+                            Toast.makeText(view.getContext(), "" + thisTime, Toast.LENGTH_SHORT).show();
+
+
                             //Arrays.asList(itm)
                             String item = itm.toString();
                             String items = item.substring(1, item.length() - 1);
@@ -101,6 +117,8 @@ public class CartFragment extends Fragment {
                             usermap.put("totalcost", total);
                             usermap.put("name", Name);
                             usermap.put("mobile", Mobile);
+                            usermap.put("date", thisDate);
+                            usermap.put("time", thisTime);
 
 
                             final DocumentReference documentReference = fStore.collection("orders").document();

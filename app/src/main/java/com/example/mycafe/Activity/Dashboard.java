@@ -55,7 +55,7 @@ public class Dashboard extends AppCompatActivity {
         userId = user.getUid();
 
 
-        DocumentReference documentReference = fStore.collection("users").document(userId);
+        final DocumentReference documentReference = fStore.collection("users").document(userId);
         documentReference.addSnapshotListener(Dashboard.this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -64,6 +64,8 @@ public class Dashboard extends AppCompatActivity {
                 Phone.setText(documentSnapshot.getString("Mobile"));
                 DateCreated.setText(documentSnapshot.getString("Datecreated"));
                 Dept.setText(documentSnapshot.getString("Department"));
+                Points.setText(documentSnapshot.getString("points"));
+                OrderCount.setText(documentSnapshot.getString("ordercount"));
 
             }
         });

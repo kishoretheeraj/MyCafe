@@ -42,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore mFireStore;
     boolean isEmailValid;
     String thisDate;
+    String ordercount="0";
+    String points = "0";
     String emailPattern = "[a-z.]*+[a-z.]*+[0-9.]*+[a-z]+@ritchennai.edu.in$";
     ArrayList<String> orders = new ArrayList<>();
 
@@ -167,7 +169,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 usermap.put("Email", email);
                                 usermap.put("Mobile", mobile);
                                 usermap.put("Password", finalPassword);
-                                usermap.put("order Id", orders);
+                                usermap.put("orders", orders);
+                                usermap.put("ordercount", ordercount);
+                                usermap.put("points", points);
 
 
                                 DocumentReference documentReference = mFireStore.collection("users").document(userid);

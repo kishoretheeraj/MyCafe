@@ -1,10 +1,14 @@
 package com.example.mycafe.Fragment;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.protobuf.StringValue;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -42,6 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.SimpleTimeZone;
 
 public class CartFragment extends Fragment {
@@ -59,7 +65,14 @@ public class CartFragment extends Fragment {
     static CardView cardorder;
     FirebaseAuth fAuth;
     FirebaseUser user;
-    String userId, Name, Mobile, thisDate, thisTime;
+    Dialog dialog;
+
+    String userId;
+    String Name;
+    String Mobile;
+    String thisDate;
+    String thisTime;
+    int ordercount;
     ArrayList<String> orders = new ArrayList<>();
 
     @Nullable
@@ -72,7 +85,7 @@ public class CartFragment extends Fragment {
         fab = view.findViewById(R.id.fabadd);
         cardorder = view.findViewById(R.id.ordercard);
         cardorder.setVisibility(View.GONE);
-
+        dialog = new Dialog(view.getContext());
         recyclerView2 = view.findViewById(R.id.recycler_cart);
         recyclerView2.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter2 = new CartListAdapter(view.getContext(), itm);
@@ -92,7 +105,7 @@ public class CartFragment extends Fragment {
                             Name = task.getResult().get("Name").toString();
                             Mobile = task.getResult().get("Mobile").toString();
 
-                            orders = (ArrayList<String>) task.getResult().get("order Id");
+                            orders = (ArrayList<String>) task.getResult().get("orders");
 
 
                             SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -112,6 +125,9 @@ public class CartFragment extends Fragment {
 
                             ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(splits));
 
+                            Random random = new Random();
+                            String id = "#" + String.format("%04d", random.nextInt(10000));
+
                             final Map<String, Object> usermap = new HashMap<>();
                             usermap.put("foodorder", arrayList);
                             usermap.put("totalcost", total);
@@ -119,6 +135,7 @@ public class CartFragment extends Fragment {
                             usermap.put("mobile", Mobile);
                             usermap.put("date", thisDate);
                             usermap.put("time", thisTime);
+                            usermap.put("orderid", id);
 
 
                             final DocumentReference documentReference = fStore.collection("orders").document();
@@ -127,15 +144,29 @@ public class CartFragment extends Fragment {
                                 @Override
                                 public void onSuccess(Void aVoid) {
 
-
                                     orders.add(documentReference.getId());
+
+                                    ordercount = orders.size();
+                                    int points = (ordercount * 2);
+
+                                    String count = String.valueOf(ordercount);
+                                    String orderpoints = String.valueOf(points);
 
 
                                     Toast.makeText(view.getContext(), "" + orders, Toast.LENGTH_SHORT).show();
 
                                     fStore.collection("users")
                                             .document(userId)
-                                            .update("order Id", orders);
+                                            .update("orders", orders);
+
+                                    fStore.collection("users")
+                                            .document(userId)
+                                            .update("ordercount", count);
+
+
+                                    fStore.collection("users")
+                                            .document(userId)
+                                            .update("points", orderpoints);
 
                                     // Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
 
@@ -147,7 +178,12 @@ public class CartFragment extends Fragment {
                                 }
                             });
 
+                            ordersuccessdialog();
+
+
                             Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //show order failed dialog box
                         }
                     }
                 });
@@ -185,6 +221,32 @@ public class CartFragment extends Fragment {
         }
 
         return view;
+    }
+
+    private void ordersuccessdialog() {
+        dialog.setContentView(R.layout.orderplaced_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imageViewclose = dialog.findViewById(R.id.imageViewclose);
+        Button btnokay = dialog.findViewById(R.id.okaybtn);
+
+        imageViewclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                dialog.dismiss();
+
+            }
+        });
+        btnokay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 
     public static void calculateTotal() {

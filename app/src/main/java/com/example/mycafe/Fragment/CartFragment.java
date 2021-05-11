@@ -169,6 +169,7 @@ public class CartFragment extends Fragment {
                                             .document(userId)
                                             .update("points", orderpoints);
 
+
                                     // Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
 
                                 }

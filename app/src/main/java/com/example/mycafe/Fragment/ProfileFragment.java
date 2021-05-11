@@ -16,7 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mycafe.Activity.Dashboard;
-import com.example.mycafe.Activity.MainActivity;
+import com.example.mycafe.Auth.MainActivity;
 import com.example.mycafe.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

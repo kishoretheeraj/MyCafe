@@ -1,4 +1,4 @@
-package com.example.mycafe.Activity;
+package com.example.mycafe.Auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mycafe.Activity.HomePage;
 import com.example.mycafe.R;
 import com.google.firebase.auth.FirebaseAuth;
 

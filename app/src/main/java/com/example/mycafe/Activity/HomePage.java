@@ -56,7 +56,7 @@ public class HomePage extends AppCompatActivity {
                 //selectedFragment = HomeFragment.getInstance();
                 //break;
 
-                case R.id.search:
+                case R.id.foods:
                     fm.beginTransaction().hide(active).show(fragment4).commit();
                     active = fragment4;
                     return true;

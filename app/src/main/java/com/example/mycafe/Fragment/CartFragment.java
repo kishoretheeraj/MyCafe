@@ -68,6 +68,7 @@ public class CartFragment extends Fragment {
     Dialog dialog;
 
     String userId;
+    String id;
     String Name;
     String Mobile;
     String thisDate;
@@ -126,7 +127,7 @@ public class CartFragment extends Fragment {
                             ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(splits));
 
                             Random random = new Random();
-                            String id = "#" + String.format("%04d", random.nextInt(10000));
+                            id = "#" + String.format("%04d", random.nextInt(10000));
 
                             final Map<String, Object> usermap = new HashMap<>();
                             usermap.put("foodorder", arrayList);
@@ -178,7 +179,7 @@ public class CartFragment extends Fragment {
                                 }
                             });
 
-                            ordersuccessdialog();
+                            ordersuccessdialog(id, thisDate, thisTime, total);
 
 
                             Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
@@ -223,12 +224,23 @@ public class CartFragment extends Fragment {
         return view;
     }
 
-    private void ordersuccessdialog() {
+    private void ordersuccessdialog(String id, String date, String time, int cost) {
         dialog.setContentView(R.layout.orderplaced_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         ImageView imageViewclose = dialog.findViewById(R.id.imageViewclose);
         Button btnokay = dialog.findViewById(R.id.okaybtn);
+        TextView orderid = dialog.findViewById(R.id.orderid);
+        TextView orderdate = dialog.findViewById(R.id.orderdate);
+        TextView ordertime = dialog.findViewById(R.id.ordertime);
+        TextView ordercost = dialog.findViewById(R.id.ordercost);
+
+        String totalcost = "Rs. " + cost;
+
+        orderid.setText(id);
+        orderdate.setText(date);
+        ordertime.setText(time);
+        ordercost.setText(totalcost);
 
         imageViewclose.setOnClickListener(new View.OnClickListener() {
             @Override

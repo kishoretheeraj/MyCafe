@@ -46,7 +46,7 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="120dp"
                app:cardElevation="6dp"
                 android:layout_centerHorizontal="true"
@@ -247,6 +247,7 @@
             android:background="@drawable/inputborders"
             android:letterSpacing="0.11"
             android:padding="5dp"
+            android:layout_marginBottom="20dp"
             android:onClick="change"
             android:text="Change Password"
             android:textColor="#2149FF"

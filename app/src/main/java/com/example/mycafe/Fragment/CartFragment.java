@@ -203,6 +203,7 @@ public class CartFragment extends Fragment {
                 fragmentTransaction.hide(fragmentManager.findFragmentByTag("2")).show(fragmentManager.findFragmentByTag("1"));
                 fragmentTransaction.commit();
                 HomePage.setActive();
+
             }
         });
 

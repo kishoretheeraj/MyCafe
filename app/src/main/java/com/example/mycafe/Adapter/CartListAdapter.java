@@ -7,18 +7,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mycafe.Activity.items;
 import com.example.mycafe.Fragment.CartFragment;
-import com.example.mycafe.Fragment.HomeFragment;
+import com.example.mycafe.Fragment.FoodsFragment;
 import com.example.mycafe.R;
 import java.util.ArrayList;
-
-import static com.example.mycafe.Activity.items.updateItems;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> {
 
@@ -50,7 +46,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.btrem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment.Changed((String) holder.itemname.getText());
+                FoodsFragment.Changed((String) holder.itemname.getText());
                 dataitems.remove(position);
                 notifyItemRemoved(position);
                 notifyItemChanged(position, dataitems.size());

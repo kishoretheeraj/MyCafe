@@ -62,7 +62,8 @@ public class Dashboard extends AppCompatActivity {
                 Name.setText(documentSnapshot.getString("Name"));
                 Email.setText(documentSnapshot.getString("Email"));
                 Phone.setText(documentSnapshot.getString("Mobile"));
-                DateCreated.setText(documentSnapshot.getString("Datecreated"));
+                String dateCreated = documentSnapshot.getString("Datecreated");
+                DateCreated.setText(dateCreated.substring(8,10) + dateCreated.substring(4,8) + dateCreated.substring(0,4));
                 Dept.setText(documentSnapshot.getString("Department"));
                 Points.setText(documentSnapshot.getString("points"));
                 OrderCount.setText(documentSnapshot.getString("ordercount"));

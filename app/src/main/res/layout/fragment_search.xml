@@ -5,13 +5,23 @@
     android:background="#2196F3">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Total Orders"
-        android:textColor="#ffffff"
-        android:textSize="30sp">
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="#2149FF"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:letterSpacing="0.11"
+        android:textSize="20dp"
+        android:text="YOUR PREVIOUS ORDERS" />
 
-    </TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_below="@id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

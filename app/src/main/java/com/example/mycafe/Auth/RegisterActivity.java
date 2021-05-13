@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         mFireStore = FirebaseFirestore.getInstance();
 
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy/MM/dd");
         Date todayDate = new Date();
         thisDate = currentDate.format(todayDate);
         Toast.makeText(this, "" + thisDate, Toast.LENGTH_SHORT).show();

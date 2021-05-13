@@ -109,7 +109,7 @@ public class CartFragment extends Fragment {
                             orders = (ArrayList<String>) task.getResult().get("orders");
 
 
-                            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                            SimpleDateFormat currentDate = new SimpleDateFormat("yyyy/MM/dd");
                             Date todayDate = new Date();
                             thisDate = currentDate.format(todayDate);
                             Toast.makeText(view.getContext(), "" + thisDate, Toast.LENGTH_SHORT).show();

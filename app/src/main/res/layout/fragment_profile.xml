@@ -19,38 +19,19 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:cardBackgroundColor="#FFC821"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/mycafeText"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginLeft="96dp"
-                android:background="@drawable/mycafetextborder"
-                android:fontFamily="cursive"
-                android:paddingBottom="10dp"
-                android:text=" MyCafe "
-                android:textColor="@color/colorPrimary"
-                android:textSize="70sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
-
             <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="134dp"
-                android:layout_height="100dp"
-                android:background="@android:color/transparent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/chef" />
-
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/mycafe" />
         </androidx.cardview.widget.CardView>
 
         <Space
@@ -59,10 +40,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/colorPrimary"
-            app:cardCornerRadius="15dp"
+            android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/inputborders"
                 android:fontFamily="cursive"
-                android:gravity="center"
+                android:layout_gravity="center"
                 android:letterSpacing="0.11"
                 android:padding="10dp"
                 android:text="Count the memories, Not the calories"

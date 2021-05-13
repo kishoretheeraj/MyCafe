@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#2149FF"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        app:cardCornerRadius="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+
+        <TableLayout
+            android:id="@+id/order_Card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFC821">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/order_ID_Tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.11"
+                    android:layout_column="0"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:text="ORDER ID : " />
+
+                <TextView
+                    android:id="@+id/order_ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:letterSpacing="0.11"
+                    android:padding="5dp"
+                    android:background="#654C00"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/order_Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:text="DATE"/>
+
+                <TextView
+                    android:id="@+id/order_Time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:letterSpacing="0.11"
+                    android:layout_gravity="start"
+                    android:textColor="#000"
+                    android:gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:padding="5dp"
+                    android:text="TIME" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/order_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/serialno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:background="#654C00"
+                    android:layout_column="0"
+                    android:lineHeight="25dp"
+                    android:textColor="#FFF"
+                    android:letterSpacing="0.11"
+                    android:text="S.NO." />
+
+                <TextView
+                    android:id="@+id/order_food_name"
+                    android:layout_width="wrap_content"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:letterSpacing="0.11"
+                    android:layout_column="1"
+                    android:background="#654C00"
+                    android:textColor="#FFF"
+                    android:lineHeight="25dp"
+                    android:layout_height="wrap_content"
+                    android:text="FOOD NAME" />
+
+                <TextView
+                    android:id="@+id/order_food_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:padding="5dp"
+                    android:letterSpacing="0.11"
+                    android:layout_column="2"
+                    android:background="#654C00"
+                    android:textColor="#FFF"
+                    android:lineHeight="25dp"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:text="QUANTITY" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/total_Cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:layout_column="1"
+                    android:letterSpacing="0.11"
+                    android:background="#2149FF"
+                    android:textStyle="bold"
+                    android:textColor="#FFF"
+                    android:text="TOTAL PRICE : COST" />
+
+            </TableRow>
+        </TableLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

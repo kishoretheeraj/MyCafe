@@ -6,44 +6,14 @@
     android:layout_height="match_parent"
     android:background="#FFC821">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/mycafetextborder"
-        android:fontFamily="cursive"
-        android:paddingBottom="10dp"
-        android:text=" MyCafe "
-        android:textColor="#222DFF"
-        android:textSize="80dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="134dp"
-        android:layout_height="108dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="70dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/chef" />
-
     <EditText
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="49dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/inputborders"
         android:drawableStart="@drawable/ic_baseline_email_24"
         android:drawablePadding="20dp"
-        android:background="@drawable/inputborders"
         android:ems="10"
         android:hint="COLLEGE EMAIL ID"
         android:inputType="textPersonName"
@@ -59,10 +29,10 @@
         android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="49dp"
-        android:drawableStart="@drawable/ic_baseline_security_24"
-        android:drawablePadding="20dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/inputborders"
+        android:drawableStart="@drawable/ic_baseline_security_24"
+        android:drawablePadding="20dp"
         android:ems="10"
         android:hint="PASSWORD"
         android:inputType="textPassword"
@@ -77,13 +47,14 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:fontFamily="cursive"
         android:text=" Count the memories, not the calories. "
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/login"
@@ -144,5 +115,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newuser" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mycafe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

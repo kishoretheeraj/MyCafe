@@ -35,20 +35,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.protobuf.StringValue;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-import java.util.SimpleTimeZone;
 
 public class CartFragment extends Fragment {
 
@@ -75,6 +70,9 @@ public class CartFragment extends Fragment {
     String thisTime;
     int ordercount;
     ArrayList<String> orders = new ArrayList<>();
+
+    ArrayList<Long> sortid = new ArrayList<Long>();
+    Long sum;
 
     @Nullable
     @Override
@@ -129,61 +127,101 @@ public class CartFragment extends Fragment {
                             Random random = new Random();
                             id = "#" + String.format("%04d", random.nextInt(10000));
 
-                            final Map<String, Object> usermap = new HashMap<>();
-                            usermap.put("foodorder", arrayList);
-                            usermap.put("totalcost", total);
-                            usermap.put("name", Name);
-                            usermap.put("mobile", Mobile);
-                            usermap.put("date", thisDate);
-                            usermap.put("time", thisTime);
-                            usermap.put("orderid", id);
+
+                            fStore.collection("sort")
+                                    .document("array").get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                sortid = (ArrayList<Long>) document.get("sortid");
+                                                Toast.makeText(view.getContext(), "" + sortid, Toast.LENGTH_SHORT).show();
+
+                                                sum = sortid.get(sortid.size() - 1);
+                                                Toast.makeText(view.getContext(), "" + sum, Toast.LENGTH_SHORT).show();
 
 
-                            final DocumentReference documentReference = fStore.collection("orders").document();
+                                                final Map<String, Object> usermap = new HashMap<>();
+                                                usermap.put("foodorder", arrayList);
+                                                usermap.put("totalcost", total);
+                                                usermap.put("name", Name);
+                                                usermap.put("mobile", Mobile);
+                                                usermap.put("date", thisDate);
+                                                usermap.put("time", thisTime);
+                                                usermap.put("orderid", id);
+                                                usermap.put("sortid", sum);
 
-                            documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
+                                                final DocumentReference documentReference = fStore.collection("orders").document();
 
-                                    orders.add(documentReference.getId());
+                                                documentReference.set(usermap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
 
-                                    ordercount = orders.size();
-                                    int points = (ordercount * 2);
+                                                        orders.add(documentReference.getId());
 
-                                    String count = String.valueOf(ordercount);
-                                    String orderpoints = String.valueOf(points);
+                                                        ordercount = orders.size();
+                                                        int points = (ordercount * 2);
 
-
-                                    Toast.makeText(view.getContext(), "" + orders, Toast.LENGTH_SHORT).show();
-
-                                    fStore.collection("users")
-                                            .document(userId)
-                                            .update("orders", orders);
-
-                                    fStore.collection("users")
-                                            .document(userId)
-                                            .update("ordercount", count);
-
-
-                                    fStore.collection("users")
-                                            .document(userId)
-                                            .update("points", orderpoints);
+                                                        String count = String.valueOf(ordercount);
+                                                        String orderpoints = String.valueOf(points);
 
 
-                                    // Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
+                                                        ////    Toast.makeText(view.getContext(), "" + orders, Toast.LENGTH_SHORT).show();
 
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(view.getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                                        fStore.collection("users")
+                                                                .document(userId)
+                                                                .update("orders", orders);
+
+                                                        fStore.collection("users")
+                                                                .document(userId)
+                                                                .update("ordercount", count);
+
+
+                                                        fStore.collection("users")
+                                                                .document(userId)
+                                                                .update("points", orderpoints);
+
+
+                                                        // Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        //// Toast.makeText(view.getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
+
+                                                sum = sum + 1;
+                                                sortid.add(sum);
+                                                fStore.collection("sort")
+                                                        .document("array")
+                                                        .update("sortid", sortid);
+
+                                                Toast.makeText(view.getContext(), "" + sortid, Toast.LENGTH_SHORT).show();
+                                            } else {
+
+                                            }
+
+
+                                        }
+                                    });
+
+
+
+
+                            //int last = sortid.get(sortid.size() - 1);
+                            //Toast.makeText(view.getContext(), "" + last, Toast.LENGTH_SHORT).show();
+
+                            //  usermap.put("sortid", last);
+
 
                             ordersuccessdialog(id, thisDate, thisTime, total);
 
 
-                            Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
+                            ////Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
                         } else {
                             //show order failed dialog box
                         }

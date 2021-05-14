@@ -24,6 +24,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,7 +75,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void ReadData() {
-        options = new FirestoreRecyclerOptions.Builder<orders>().setQuery(ref.whereEqualTo("mobile", mobile), orders.class).build();
+        options = new FirestoreRecyclerOptions.Builder<orders>().setQuery(ref.whereEqualTo("mobile", mobile).orderBy("sortid", Query.Direction.DESCENDING), orders.class).build();
         adapter = new FirestoreRecyclerAdapter<orders, OrdersAdapter>(options) {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull OrdersAdapter holder, int position, @NonNull @NotNull orders model) {

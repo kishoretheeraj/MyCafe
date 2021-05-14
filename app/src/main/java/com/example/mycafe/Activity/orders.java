@@ -53,7 +53,7 @@ public class orders {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date = date.substring(8,10) + date.substring(4,8) + date.substring(0,4);
     }
 
     public String getTime() {

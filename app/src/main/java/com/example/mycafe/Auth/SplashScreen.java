@@ -5,12 +5,25 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mycafe.Activity.HomePage;
+import com.example.mycafe.Activity.items;
+import com.example.mycafe.Adapter.RecyclerAdapter;
 import com.example.mycafe.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SplashScreen extends AppCompatActivity {
     ProgressBar progressBar;

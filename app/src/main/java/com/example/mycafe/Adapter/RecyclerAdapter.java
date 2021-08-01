@@ -14,7 +14,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mycafe.Activity.items;
+import com.example.mycafe.Fragment.FoodsFragment;
 import com.example.mycafe.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -22,12 +25,12 @@ import static com.example.mycafe.Activity.items.addItems;
 import static com.example.mycafe.Activity.items.updateItems;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    String[] data;
-    String[] data2;
-    int[] data3;
+    ArrayList<String> data;
+    ArrayList<String> data2;
+    ArrayList<String> data3;
     Context context;
 
-    public RecyclerAdapter(Context context, String[] data, String[] data2, int[] data3) {
+    public RecyclerAdapter(Context context, ArrayList<String> data, ArrayList<String> data2, ArrayList<String> data3) {
         this.data = data;
         this.data2 = data2;
         this.data3 = data3;
@@ -43,12 +46,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return viewHolder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
-        holder.foodName.setText(data[position]);
-        holder.foodRate.setText(data2[position]);
-        holder.foodImg.setImageResource(data3[position]);
+        holder.foodName.setText(data.get(position));
+        holder.foodRate.setText(data2.get(position));
+        Picasso.with(context).load(data3.get(position)).into(holder.foodImg);
+
+        if (items.quant_sel_list.get(position) == 0) {
+            holder.AddButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.AddButton.setVisibility(View.INVISIBLE);
+            holder.quantity.setText("" + items.quant_sel_list.get(position));
+        }
 
         holder.QtyPlus.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -61,6 +73,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 } else {
                     count += 1;
                     holder.quantity.setText("" + count);
+                    items.quant_sel_list.set(position, count);
                     updateItems((String) holder.foodName.getText(), String.valueOf(count));
                 }
             }
@@ -76,6 +89,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     holder.AddButton.setVisibility(View.VISIBLE);
                 }
                 holder.quantity.setText("" + count);
+                items.quant_sel_list.set(position, count);
                 updateItems((String) holder.foodName.getText(), String.valueOf(count));
             }
         });
@@ -85,9 +99,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
                 ArrayList<String> lis2 = new ArrayList<>();
                 holder.quantity.setText("1");
-
-                lis2.add(data[position]);
-                lis2.add(data2[position]);
+                items.quant_sel_list.set(position, 1);
+                lis2.add(data.get(position));
+                lis2.add(data2.get(position));
                 lis2.add(String.valueOf(holder.quantity.getText()));
 
                 addItems(lis2);
@@ -101,7 +115,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

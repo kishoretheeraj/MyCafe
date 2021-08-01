@@ -1,5 +1,6 @@
 package com.example.mycafe.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mycafe.Activity.HomePage;
 import com.example.mycafe.Fragment.CartFragment;
 import com.example.mycafe.Fragment.FoodsFragment;
 import com.example.mycafe.R;
@@ -36,6 +39,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         return viewHolder;
     }
 
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull final CartListAdapter.ViewHolder holder, final int position) {
 
@@ -43,22 +47,27 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.itemrate.setText(dataitems.get(position).get(1));
         holder.textQty.setText(dataitems.get(position).get(2));
 
-        holder.btrem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FoodsFragment.Changed((String) holder.itemname.getText());
-                dataitems.remove(position);
-                notifyItemRemoved(position);
-                notifyItemChanged(position, dataitems.size());
-                CartFragment.calculateTotal();
-            }
+        holder.btrem.setOnClickListener(v -> {
+            String food_name_removed = (String) holder.itemname.getText();
+            FoodsFragment.Changed(food_name_removed);
+            Toast.makeText(v.getContext(), "You have removed " + food_name_removed, Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < dataitems.size(); i++)
+                if (dataitems.get(i).get(0).equals(food_name_removed)) {
+                    dataitems.remove(i);
+                    break;
+                }
+            //notifyItemRemoved(position);
+            //notifyItemChanged(position, dataitems.size());
+            FoodsFragment.itemChanged();
+            CartFragment.calculateTotal();
+            HomePage.refreshCartFragment();
         });
 
-        int amt = 0;
+        int amt;
         String str;
         str = String.valueOf(holder.itemrate.getText()).replace("Rs.", "");
         amt = Integer.parseInt(String.valueOf(holder.textQty.getText())) * Integer.parseInt(str);
-        holder.itemamt.setText("Rs." + amt);
+        holder.itemamt.setText(  "Rs." + amt);
 
     }
 

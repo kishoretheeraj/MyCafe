@@ -1,5 +1,6 @@
 package com.example.mycafe.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -110,11 +111,11 @@ public class CartFragment extends Fragment {
                             SimpleDateFormat currentDate = new SimpleDateFormat("yyyy/MM/dd");
                             Date todayDate = new Date();
                             thisDate = currentDate.format(todayDate);
-                            Toast.makeText(view.getContext(), "" + thisDate, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(view.getContext(), "" + thisDate, Toast.LENGTH_SHORT).show();
 
                             DateFormat dateFormat = new SimpleDateFormat("hh.mm aa");
                             thisTime = dateFormat.format(new Date());
-                            Toast.makeText(view.getContext(), "" + thisTime, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(view.getContext(), "" + thisTime, Toast.LENGTH_SHORT).show();
 
 
                             //Arrays.asList(itm)
@@ -136,10 +137,10 @@ public class CartFragment extends Fragment {
                                             if (task.isSuccessful()) {
                                                 DocumentSnapshot document = task.getResult();
                                                 sortid = (ArrayList<Long>) document.get("sortid");
-                                                Toast.makeText(view.getContext(), "" + sortid, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(view.getContext(), "" + sortid, Toast.LENGTH_SHORT).show();
 
                                                 sum = sortid.get(sortid.size() - 1);
-                                                Toast.makeText(view.getContext(), "" + sum, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(view.getContext(), "" + sum, Toast.LENGTH_SHORT).show();
 
 
                                                 final Map<String, Object> usermap = new HashMap<>();
@@ -200,7 +201,7 @@ public class CartFragment extends Fragment {
                                                         .document("array")
                                                         .update("sortid", sortid);
 
-                                                Toast.makeText(view.getContext(), "" + sortid, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(view.getContext(), "" + sortid, Toast.LENGTH_SHORT).show();
                                             } else {
 
                                             }
@@ -217,9 +218,7 @@ public class CartFragment extends Fragment {
 
                             //  usermap.put("sortid", last);
 
-
                             ordersuccessdialog(id, thisDate, thisTime, total);
-
 
                             ////Toast.makeText(view.getContext(), "Order Placed", Toast.LENGTH_SHORT).show();
                         } else {
@@ -288,6 +287,8 @@ public class CartFragment extends Fragment {
 
 
                 dialog.dismiss();
+                com.example.mycafe.Activity.items.removeItems();
+                FoodsFragment.itemChanged();
 
             }
         });
@@ -295,12 +296,14 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                com.example.mycafe.Activity.items.removeItems();
+                FoodsFragment.itemChanged();
             }
         });
         dialog.show();
-
     }
 
+    @SuppressLint("SetTextI18n")
     public static void calculateTotal() {
         int i = 0;
         total = 0;
@@ -320,6 +323,5 @@ public class CartFragment extends Fragment {
         }
 
         tot.setText("" + total);
-
     }
 }

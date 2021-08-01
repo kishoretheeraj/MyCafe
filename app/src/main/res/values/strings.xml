@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyCafe</string>
+    <string name="sandwich">Sandwich</string>
+    <string name="remaining_100">Remaining : 100</string>
 </resources>

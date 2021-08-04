@@ -15,16 +15,16 @@
         android:background="#FFC107"
         android:gravity="center"
         android:padding="10dp"
-        android:text="LIVE COUNTER"
+        android:text="@string/live_counter"
         android:textColor="#000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/liveCounter_List_View"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/liveCounter_RecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -34,4 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/liveCounter_TextView" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

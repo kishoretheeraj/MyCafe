@@ -2,6 +2,8 @@ package com.example.mycafe.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,9 +24,18 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mycafe.Activity.HomePage;
 import com.example.mycafe.Activity.items;
 import com.example.mycafe.Adapter.CartListAdapter;
+import com.example.mycafe.Auth.MainActivity;
 import com.example.mycafe.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -250,12 +261,13 @@ public class CartFragment extends Fragment {
 
             calculateTotal();
             cardorder.setVisibility(View.VISIBLE);
-            fab.setVisibility(View.GONE);
-            not.setVisibility(View.GONE);
+            fab.setVisibility(View.INVISIBLE);
+            not.setVisibility(View.INVISIBLE);
+
 
         } else {
             tot.setText("0");
-            cardorder.setVisibility(View.GONE);
+            cardorder.setVisibility(View.INVISIBLE);
             fab.setVisibility(View.VISIBLE);
             not.setVisibility(View.VISIBLE);
         }
@@ -264,6 +276,9 @@ public class CartFragment extends Fragment {
     }
 
     private void ordersuccessdialog(String id, String date, String time, int cost) {
+
+        updateItemToSheet(); //To change Live Counter
+
         dialog.setContentView(R.layout.orderplaced_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -323,5 +338,55 @@ public class CartFragment extends Fragment {
         }
 
         tot.setText("" + total);
+    }
+
+    private void updateItemToSheet() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://script.google.com/macros/s/AKfycbzmyWtzindXUgW1vGA0AS7f_PgSrJxOr51yvLrczdSh5T8c2KoxMIj0EpN_4W8FGRFm/exec",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //Toast.makeText(AddItem.this,response,Toast.LENGTH_LONG).show();
+                        //Intent intent = new Intent(getContext(), MainActivity.class);
+                        //startActivity(intent);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> parmas = new HashMap<>();
+                String foodlist = items.getList().get(0).get(0);
+                String quantlist = items.getList().get(0).get(2);
+
+                for (int i = 1; i < items.getList().size(); i++) {
+                    foodlist = foodlist + "/" + items.getList().get(i).get(0);
+                    quantlist = quantlist + "/" + items.getList().get(i).get(2);
+                }
+
+                //here we pass params
+                parmas.put("action", "updateItem");
+                parmas.put("FOODNAMES", foodlist);
+                parmas.put("QUANTITY", quantlist);
+
+                return parmas;
+            }
+        };
+
+        //int socketTimeOut = 50000;// u can change this .. here it is 50 seconds
+
+        //RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        //stringRequest.setRetryPolicy(retryPolicy);
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        queue.add(stringRequest);
     }
 }

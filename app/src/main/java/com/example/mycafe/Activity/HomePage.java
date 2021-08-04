@@ -47,11 +47,7 @@ public class HomePage extends AppCompatActivity {
 
     public static void refreshCartFragment() {
         FragmentManager fragmentManager = fragment2.getFragmentManager();
-
-        if (fragmentManager != null) {
-            fragmentManager.beginTransaction().detach(fragment2).attach(fragment2).commit();
-        }
-
+        fragmentManager.beginTransaction().detach(fragment2).attach(fragment2).commit();
     }
 
     @SuppressLint("NonConstantResourceId")

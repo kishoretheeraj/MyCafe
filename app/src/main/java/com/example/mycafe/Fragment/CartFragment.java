@@ -160,6 +160,7 @@ public class CartFragment extends Fragment {
                                                 usermap.put("name", Name);
                                                 usermap.put("mobile", Mobile);
                                                 usermap.put("date", thisDate);
+                                                usermap.put("status", "ordered");
                                                 usermap.put("time", thisTime);
                                                 usermap.put("orderid", id);
                                                 usermap.put("sortid", sum);
@@ -222,12 +223,11 @@ public class CartFragment extends Fragment {
                                     });
 
 
-
-
                             //int last = sortid.get(sortid.size() - 1);
                             //Toast.makeText(view.getContext(), "" + last, Toast.LENGTH_SHORT).show();
 
                             //  usermap.put("sortid", last);
+
 
                             ordersuccessdialog(id, thisDate, thisTime, total);
 

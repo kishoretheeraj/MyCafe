@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("yyyy/MM/dd");
         Date todayDate = new Date();
         thisDate = currentDate.format(todayDate);
-        Toast.makeText(this, "" + thisDate, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + thisDate, Toast.LENGTH_SHORT).show();
 
 
         BackToLogin.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +103,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Dept.setError("Department is required");
                     return;
                 }
-
-                /*if (TextUtils.isEmpty(email)) {
-                    emailAddress.setError("Email is required");
-                    return;
-                }*/
-
                 if (TextUtils.isEmpty(mobile)) {
                     phoneNumber.setError("Mobile Number is required");
                     return;
